@@ -28,14 +28,19 @@ This is sample to run on EC2.
 1. make JAR
 
 `mvn install`
+
 2. transfer jar to EC2
 
 `scp -o  ProxyCommand="aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'" -i [EC2 private key].pem  target/application.jar ec2-user@i-xxxxxxxxxxxxxxxxx:/home/ssm-user/application.jar`
+
 3. SSH and run
 
 `aws ssm start-session --target i-xxxxxxxxxxxxxxxxx`
+
 `cd ~`
+
 `java -jar ~/application.jar`
+
 4. access from browser
 
 `http://[EC2 hostname]:8080/dynamo/env`
